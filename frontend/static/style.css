@@ -1,0 +1,380 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    /* พาเลทสีหลัก - โทนสีน้ำเงินอมม่วง */
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --card-bg-alt: #334155;
+    --text-color: #f1f5f9;
+    --text-secondary: #cbd5e1;
+    --primary-color: #38bdf8;
+    --primary-dark: #0284c7;
+    --secondary-color: #0f172a;
+    --accent-color: #f472b6;
+    --success-color: #22c55e;
+    --warning-color: #fbbf24;
+    --danger-color: #ef4444;
+    --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.3), 0 4px 6px -4px rgba(0, 0, 0, 0.2);
+    --hover-bg: #334155;
+    --hover-light: rgba(255, 255, 255, 0.05);
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
+    background-color: var(--bg-color);
+    background-image: linear-gradient(to bottom, #0f172a, #1e293b);
+    background-attachment: fixed;
+    color: var(--text-color);
+    padding: 0;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease;
+}
+
+header {
+    background-color: var(--secondary-color);
+    background-image: linear-gradient(to right, #0f172a, #1e293b);
+    color: white;
+    padding: 1.2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+h1 {
+    margin-bottom: 0.5rem;
+    background: linear-gradient(to right, var(--primary-color), var(--accent-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-weight: bold;
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 0.8rem;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+h3 {
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+    font-size: 1.1rem;
+}
+
+h4 {
+    color: var(--text-secondary);
+    margin-bottom: 0.8rem;
+    font-size: 0.9rem;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+.dashboard-container {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    flex: 1;
+    width: 100%;
+}
+
+.dashboard-header {
+    text-align: left;
+    margin-top: 0.5rem;
+    border-bottom: 1px solid var(--hover-light);
+    padding-bottom: 0.5rem;
+}
+
+.dashboard-header h2 {
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    background: linear-gradient(to right, var(--text-color), var(--primary-color));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.sensor-cards {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    justify-content: center;
+}
+
+.sensor-card {
+    background: var(--card-bg);
+    padding: 1.8rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    flex: 1;
+    min-width: 200px;
+    transition: all 0.3s ease;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.sensor-card:hover {
+    transform: translateY(-5px);
+    background-color: var(--hover-bg);
+    box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 8px 10px -6px rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sensor-card:nth-child(1) p {
+    color: var(--danger-color);
+}
+
+.sensor-card:nth-child(2) p {
+    color: var(--primary-color);
+}
+
+.sensor-card:nth-child(3) p {
+    color: var(--warning-color);
+}
+
+.sensor-card p {
+    font-size: 1.8rem;
+    font-weight: bold;
+    margin: 10px 0;
+}
+
+.charts-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.chart-wrapper {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    flex: 1;
+    min-width: 300px;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.chart-wrapper:hover {
+    background-color: var(--hover-light);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.chart-container {
+    position: relative;
+    height: 350px;
+    width: 100%;
+}
+
+.sensor-list {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: var(--card-shadow);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+}
+
+.sensor-item {
+    background: var(--hover-bg);
+    padding: 1rem;
+    margin: 0.5rem 0;
+    border-radius: 8px;
+    text-align: left;
+    display: flex;
+    justify-content: space-between;
+    transition: all 0.2s ease;
+    border-left: 4px solid var(--primary-color);
+}
+
+.sensor-item:hover {
+    background-color: rgba(54, 54, 54, 0.8);
+    transform: translateX(5px);
+}
+
+.sensor-item:nth-child(odd) {
+    border-left: 4px solid var(--accent-color);
+}
+
+.sensor-item-name {
+    font-weight: bold;
+    color: var(--text-color);
+}
+
+/* สไตล์สำหรับแสดง Environment Badge */
+.env-badge {
+    margin: 0.8rem auto;
+}
+
+#environment-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 12px;
+    color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+/* สีของแต่ละ environment */
+.env-dev {
+    background: linear-gradient(to right, #22c55e, #16a34a);
+}
+
+.env-uat {
+    background: linear-gradient(to right, #fbbf24, #f59e0b);
+}
+
+.env-prod {
+    background: linear-gradient(to right, #ef4444, #dc2626);
+}
+
+/* สไตล์สำหรับข้อความ error */
+.error-message {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: #fca5a5;
+    border: 1px solid #ef4444;
+    border-radius: 8px;
+    padding: 12px;
+    margin: 15px auto;
+    max-width: 80%;
+    display: none;
+    animation: fadeIn 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+footer {
+    background-color: var(--secondary-color);
+    background-image: linear-gradient(to right, #0f172a, #1e293b);
+    color: white;
+    padding: 1.2rem;
+    margin-top: auto;
+    border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.copyright {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    opacity: 0.7;
+}
+
+/* ปรับแต่ง responsive design */
+@media (max-width: 992px) {
+    .dashboard-container {
+        padding: 1rem;
+    }
+    
+    .charts-container {
+        flex-direction: column;
+    }
+    
+    .chart-wrapper {
+        width: 100%;
+    }
+
+    .chart-container {
+        height: 300px;
+    }
+}
+
+@media (max-width: 768px) {
+    .sensor-cards {
+        flex-direction: column;
+    }
+    
+    .sensor-card {
+        width: 100%;
+    }
+
+    .chart-container {
+        height: 250px;
+    }
+    
+    .dashboard-header {
+        text-align: center;
+    }
+}
+
+@media (max-width: 576px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+    
+    h2 {
+        font-size: 1.3rem;
+    }
+    
+    h3 {
+        font-size: 1rem;
+    }
+    
+    .sensor-card p {
+        font-size: 1.5rem;
+    }
+    
+    .dashboard-container {
+        padding: 0.8rem;
+        gap: 1rem;
+    }
+    
+    .sensor-item {
+        flex-direction: column;
+    }
+
+    .chart-container {
+        height: 200px;
+    }
+
+    .chart-wrapper {
+        padding: 1rem;
+    }
+
+    .sensor-card {
+        padding: 1rem;
+    }
+
+    .sensor-list {
+        padding: 1rem;
+    }
+}
+
+/* เพิ่ม CSS สำหรับ server-info */
+.server-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 5px;
+    font-size: 14px;
+}
+
+.server-label {
+    font-weight: bold;
+    color: #64748b;
+}
+
+#server-id {
+    color: #0ea5e9;
+    font-family: monospace;
+    font-size: 14px;
+    background-color: rgba(14, 165, 233, 0.1);
+    padding: 2px 8px;
+    border-radius: 4px;
+}

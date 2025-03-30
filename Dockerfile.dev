@@ -1,0 +1,47 @@
+# Dockerfile สำหรับ development environment ที่มี hot-reload
+ARG GOLANG_VERSION=1.23-alpine
+FROM golang:${GOLANG_VERSION}
+
+# แสดงข้อมูล platform ที่กำลังสร้าง
+ARG TARGETPLATFORM
+ARG BUILDPLATFORM
+RUN echo "Building development image for $TARGETPLATFORM on $BUILDPLATFORM"
+
+# ติดตั้ง dependencies ที่จำเป็น
+RUN apk add --no-cache git wget ca-certificates tzdata && \
+    update-ca-certificates
+
+# ติดตั้ง air สำหรับ hot-reload
+ARG AIR_VERSION=v1.46.0
+RUN go install github.com/cosmtrek/air@${AIR_VERSION}
+
+# ตั้งค่า timezone
+ENV TZ=Asia/Bangkok
+
+# ตั้งค่า environment
+ENV APP_ENV=dev
+
+# ตั้งค่า working directory
+WORKDIR /app
+
+# คัดลอก go.mod และ go.sum เพื่อทำการติดตั้ง dependencies ล่วงหน้า
+COPY go.mod go.sum ./
+RUN go mod download
+
+# ตำแหน่งที่ใช้รัน air
+WORKDIR /app/backend
+
+# สั่งให้ air ทำงาน
+CMD ["air", "-c", ".air.toml"]
+
+# เปิด port
+EXPOSE 8080
+
+# เช็คความพร้อมของแอปพลิเคชัน
+HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \
+  CMD wget -qO- http://localhost:8080/health || exit 1
+
+# สำหรับ hot-reload เราจะทำการ mount volume จากเครื่อง host
+# - ./backend:/app/backend
+# - ./frontend:/app/frontend
+# - ./configs:/app/configs 

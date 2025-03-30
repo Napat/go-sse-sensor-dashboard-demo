@@ -1,0 +1,48 @@
+# Binaries for programs and plugins
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+*.test
+*.out
+
+# Go specific
+/vendor/
+/go.work
+
+# Project specific
+/build/
+/dist/
+/tmp/
+/bin/
+
+# Development and IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+__debug_bin
+__debug_bin*
+
+# Air (hot reload)
+/backend/tmp/
+
+# Test and coverage files
+*.test
+coverage.out
+*.cover
+cover.html
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Build artifacts
+go-sse-server
+${BINARY_NAME}
+
+# Docker artifacts
+.dockerignore 

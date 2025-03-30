@@ -1,0 +1,37 @@
+# ไฟล์คอนฟิก Air สำหรับ hot-reload
+# คำสั่งพื้นฐาน: cd backend && air
+
+# ทำงานที่ไดเรกทอรีใด
+root = "."
+tmp_dir = "tmp"
+
+[build]
+# รันคำสั่งนี้เพื่อคอมไพล์แอป
+cmd = "go build -o ./tmp/main ."
+# ไฟล์ binary ที่จะรัน
+bin = "./tmp/main"
+# ไฟล์ที่ต้องการให้ดูการเปลี่ยนแปลง
+include_ext = ["go", "tpl", "tmpl", "html"]
+# ไฟล์ที่ต้องการให้ข้าม
+exclude_dir = ["assets", "tmp", "vendor"]
+# ให้ rerun เมื่อ binary จบการทำงาน
+delay = 1000 # ms
+# หากสร้างไม่ผ่าน ให้รอก่อนที่จะทำการ build ใหม่
+stop_on_error = true
+# การตั้งค่า environment variables
+full_bin = "APP_ENV=dev ./tmp/main"
+
+[log]
+# แสดงเวลาสำหรับการ log
+time = true
+
+[color]
+# การตั้งค่าสี
+main = "magenta"
+watcher = "cyan"
+build = "yellow"
+runner = "green"
+
+[misc]
+# เมื่อเริ่มต้นให้รันแอปเลย
+clean_on_exit = true 
