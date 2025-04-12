@@ -47,13 +47,25 @@ pre-loadtest-prod:
 loadtest-dev:
 	./k6-sse run -e HOST=$(HOST_DEV) -e PORT=$(PORT_DEV) --vus $(VUS_DEV) --duration $(DURATION_DEV) ./sse-loadtest.js
 
+.PHONY: loadtest-dev-dashboard
+loadtest-dev-dashboard:
+	./k6-sse run --out dashboard -e HOST=$(HOST_DEV) -e PORT=$(PORT_DEV) --vus $(VUS_DEV) --duration $(DURATION_DEV) ./sse-loadtest.js
+
 .PHONY: loadtest-uat
 loadtest-uat:
 	./k6-sse run -e HOST=$(HOST_UAT) -e PORT=$(PORT_UAT) --vus $(VUS_UAT) --duration $(DURATION_UAT) ./sse-loadtest.js
 
+.PHONY: loadtest-uat-dashboard
+loadtest-uat-dashboard:
+	./k6-sse run --out 'dashboard=port=5666&open=true' -e HOST=$(HOST_UAT) -e PORT=$(PORT_UAT) --vus $(VUS_UAT) --duration $(DURATION_UAT) ./sse-loadtest.js
+
 .PHONY: loadtest-prod
 loadtest-prod:
 	./k6-sse run -e HOST=$(HOST_PROD) -e PORT=$(PORT_PROD) --vus $(VUS_PROD) --duration $(DURATION_PROD) ./sse-loadtest.js
+
+.PHONY: loadtest-prod-dashboard
+loadtest-prod-dashboard:
+	./k6-sse run --out 'dashboard=port=5667&open=true' -e HOST=$(HOST_PROD) -e PORT=$(PORT_PROD) --vus $(VUS_PROD) --duration $(DURATION_PROD) ./sse-loadtest.js
 
 # ทำ loadtest โดยใช้ custom parameters
 # ตัวอย่างการใช้: make loadtest-custom HOST=my-api.com PORT=9000 VUS=50 DURATION=5m

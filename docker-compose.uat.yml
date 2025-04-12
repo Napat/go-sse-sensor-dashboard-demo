@@ -30,4 +30,5 @@ services:
 # กำหนดเครือข่ายสำหรับ containers
 networks:
   go-sse-network:
+    name: go-sse-network-uat
     driver: bridge 

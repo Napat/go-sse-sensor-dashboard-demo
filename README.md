@@ -514,13 +514,12 @@ cat Makefile
 make build-loadtest 
 
 ### loadtest dev env (อย่าลืมรัน app ด้วย make dev)
-make loadtest-dev
-
+make loadtest-dev   # or make loadtest-dev-dashboard
 ### loadtest uat env (อย่าลืมรัน app ด้วย make uat) 
-make loadtest-uat
+make loadtest-uat   # or make loadtest-uat-dashboard
 
 ### loadtest prod env (อย่าลืมรัน app ด้วย make prod)
-make loadtest-prod
+make loadtest-prod  # or make loadtest-prod-dashboard
 ```
 
 ตัวอย่าง loadtest result

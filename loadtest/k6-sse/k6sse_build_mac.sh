@@ -6,5 +6,6 @@
 
 docker run --rm -it -e GOOS=darwin -u "$(id -u):$(id -g)" -v "${PWD}:/xk6" \
   grafana/xk6 build v0.58.0 \
-  --with github.com/phymbert/xk6-sse
+  --with github.com/phymbert/xk6-sse --with github.com/grafana/xk6-dashboard@latest
+
 mv k6 k6-sse
